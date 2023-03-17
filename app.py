@@ -41,11 +41,11 @@ def search_movies():
 def get_single_movie(movie_id: int):
     #feature 4: get movie info and send to HTML
     movie = movie_repository.get_movie_by_id(movie_id)
-    movie_title = movie.title
-    movie_director = movie.director
-    movie_rating = movie.rating
+    title = movie.title
+    director = movie.director
+    rating = movie.rating
 
-    return render_template('get_single_movie.html', director=movie_director, title=movie_title, rating=movie_rating)
+    return render_template('get_single_movie.html', movie_director=director, movie_title=movie, movie_rating=movie)
 
 
 @app.get('/movies/<int:movie_id>/edit')
