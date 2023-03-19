@@ -34,6 +34,15 @@ def create_movie():
     director = request.form.get("movie_director")
     rating = request.form.get("movie_rating")
 
+    if title == None:
+        return render_template('create_movies_form.html', create_rating_active=True,error= True)
+
+    if director is None:
+        return render_template('create_movies_form.html', create_rating_active=True,error= True)
+
+    if rating is None:
+        return render_template('create_movies_form.html', create_rating_active=True,error= True)
+
     # creates the movie object and puts it in repository
     movie_repository.create_movie(title,director,rating)
 
