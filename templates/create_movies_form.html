@@ -13,13 +13,13 @@
 <!--Displays error message if applicable-->
 {%if error == True%}
 <div class="alert alert-danger" role="alert">
-    Erorr: Incomplete form
+    Erorr: The form you submitted was invalid
 </div>
 {%endif%}
 
 
 <!-- Takes in the data to create a movie rating-->
-<form action = "/movies" class = "card-body">
+<form action = "/movies" class = "card-body" method = "POST">
     <!--Takes the input of the name of the movie-->
     <div class = "form-group p-2">
         <label for= "movie_title" > Name of the Move: </label>

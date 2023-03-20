@@ -30,20 +30,25 @@ def create_movie():
     # After creating the movie in the database, we redirect to the list all movies page
     
     # puts the form information from the html into variables
-    title = request.form.get("movie_title")
-    director = request.form.get("movie_director")
-    rating = request.form.get("movie_rating")
+    title = request.form.get("movie_title").strip()
+    director = request.form.get("movie_director").strip()
+    
+    # trys to convert rating into a number if not rejects form
+    try:
+        rating = int(request.form.get("movie_rating"))
 
-    if title == None:
+    except ValueError:
         return render_template('create_movies_form.html', create_rating_active=True,error= True)
 
-    if director is None:
+    # checks all inputs to make sure none of them are blank
+    if title != "" and director != "" and rating != None:
+        return render_template('create_movies_form.html', create_rating_active=True,error= True)
+ 
+    # checks if rating is within boundries
+    if rating > 5 or rating < 1:
         return render_template('create_movies_form.html', create_rating_active=True,error= True)
 
-    if rating is None:
-        return render_template('create_movies_form.html', create_rating_active=True,error= True)
-
-    # creates the movie object and puts it in repository
+    # then creates a movie
     movie_repository.create_movie(title,director,rating)
 
     return redirect('/movies')
