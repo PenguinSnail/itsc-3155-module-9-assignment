@@ -5,5 +5,22 @@
 {% block body %}
 <h1 class="mb-5">All Movies</h1>
 <p class="mb-3">See our list of movie ratings below</p>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Movie</th>
+        <th scope="col">rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for object in moviedict %}
+    
+      <tr>
+        <td>{{moviedict[object].title}}</td>
+        <td>{{moviedict[object].rating}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 <!-- TODO: Feature 1 -->
 {% endblock %}
