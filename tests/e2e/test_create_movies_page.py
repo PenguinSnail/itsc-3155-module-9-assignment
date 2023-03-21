@@ -21,7 +21,6 @@ def create_movie(test_app,Title,Director,Rating):
 # test to ensure that the page still loads properly after creating a movie 
 def test_valid_movie_creation(test_app):
     test_valid_movie_creation = create_movie(test_app,"Title","Director","5")
-
     assert test_valid_movie_creation.request.path == "/movies"
     assert test_valid_movie_creation.status_code == 200
 
