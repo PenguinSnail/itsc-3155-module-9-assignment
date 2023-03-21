@@ -41,7 +41,7 @@ def create_movie():
         return render_template('create_movies_form.html', create_rating_active=True,error= True)
 
     # checks all inputs to make sure none of them are blank
-    if title != "" and director != "" and rating != None:
+    if not title or not director:
         return render_template('create_movies_form.html', create_rating_active=True,error= True)
  
     # checks if rating is within boundries
@@ -50,6 +50,9 @@ def create_movie():
 
     # then creates a movie
     movie_repository.create_movie(title,director,rating)
+    print(title)
+    print(director)
+    print(rating)
 
     return redirect('/movies')
 
