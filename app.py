@@ -40,17 +40,14 @@ def create_movie():
 
     except ValueError:
         return redirect('/movies/new',create_rating_active=True,error= True)
-        return render_template('create_movies_form.html', create_rating_active=True,error= True)
 
     # checks all inputs to make sure none of them are blank
     if not title or not director:
         return redirect('/movies/new',create_rating_active=True,error= True)
-        return render_template('create_movies_form.html', create_rating_active=True,error= True)
  
     # checks if rating is within boundaries
     if rating > 5 or rating < 1:
         return redirect('/movies/new',create_rating_active=True,error= True)
-        return render_template('create_movies_form.html', create_rating_active=True,error= True)
 
     # then creates a movie
     new_movie = movie_repository.create_movie(title,director,rating)
