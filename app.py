@@ -27,6 +27,7 @@ def create_movies_form():
 @app.post('/movies')
 def create_movie():
     # TODO: Feature 2
+    # Franky Yang
     # After creating the movie in the database, we redirect to the list all movies page
     
     # puts the form information from the html into variables
@@ -38,17 +39,14 @@ def create_movie():
         rating = int(request.form.get("movie_rating"))
 
     except ValueError:
-        return redirect('/movies/new',create_rating_active=True,error= True)
         return render_template('create_movies_form.html', create_rating_active=True,error= True)
 
     # checks all inputs to make sure none of them are blank
     if not title or not director:
-        return redirect('/movies/new',create_rating_active=True,error= True)
         return render_template('create_movies_form.html', create_rating_active=True,error= True)
  
     # checks if rating is within boundries
     if rating > 5 or rating < 1:
-        return redirect('/movies/new',create_rating_active=True,error= True)
         return render_template('create_movies_form.html', create_rating_active=True,error= True)
 
     # then creates a movie
