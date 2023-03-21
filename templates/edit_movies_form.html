@@ -15,20 +15,17 @@
 	<form action="/movies/{{ id }}" class="card-body" method="POST">
 		<div class="form-group p-2">
 			<label for="movie_title" class="mb-1">Movie Title:</label>
-			<input type="text" name="movie_title" class="form-control" placeholder="Enter the movie name"
-				value="{{ title }}" required>
+			<input type="text" name="movie_title" class="form-control" placeholder="Enter the movie name" value="{{ title }}" required>
 		</div>
 
 		<div class="form-group p-2">
 			<label for="movie_director" class="mb-1">Director:</label>
-			<input type="text" name="movie_director" class="form-control" placeholder="Enter the movie director"
-				value="{{ director }}" required>
+			<input type="text" name="movie_director" class="form-control" placeholder="Enter the movie director" value="{{ director }}" required>
 		</div>
 
 		<div class="form-group p-2">
 			<label for="movie_rating" class="mb-1">Rating (1 to 5):</label>
-			<input type="number" name="movie_rating" min="1" max="5" class="form-control" placeholder="Rate the movie"
-				value="{{ rating }}" required>
+			<input type="number" name="movie_rating" min="1" max="5" class="form-control" placeholder="Rate the movie" value="{{ rating }}" required>
 		</div>
 
 		<div class="form-group p-2">
