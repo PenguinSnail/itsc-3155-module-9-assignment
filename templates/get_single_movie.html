@@ -3,6 +3,30 @@
 {% block title %}Movie Rating App | Movie{% endblock %}
 
 {% block body %}
-<h1 class="mb-5"></h1>
-<!-- TODO: Feature 4 -->
+<h1 class="mb-5">Information for <em>{{movie_title}}</em></h1>
+
+
+<h2>Director</h2>
+<p>{{movie_director}}</p>
+
+
+<h2>Rating</h2>
+<p>{{movie_rating}}/5</p>
+
+<!--movies/<int:movie_id>/delete-->
+<!--/movies/<int:movie_id>/edit-->
+
+<h2>Actions</h2>
+
+<form method="get" action="/movies/{{ movie_id }}/edit">
+    <button type="submit" class="btn btn-outline-primary">Edit Information</button>
+</form>
+
+<form method="post" action="/movies/{{ movie_id }}/delete">
+    <button type="submit" class="btn btn-danger">
+        <img class="img-responsive center-block" src="/images/trashcan.svg" alt="Delete">
+    </button>
+</form>
+
 {% endblock %}
+ 
