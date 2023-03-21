@@ -34,7 +34,7 @@ def create_movie():
     title = request.form.get("movie_title").strip()
     director = request.form.get("movie_director").strip()
     
-    # trys to convert rating into a number if not rejects form
+    # tries to convert rating into a number if not rejects form
     try:
         rating = int(request.form.get("movie_rating"))
 
@@ -45,15 +45,16 @@ def create_movie():
     if not title or not director:
         return render_template('create_movies_form.html', create_rating_active=True,error= True)
  
-    # checks if rating is within boundries
+    # checks if rating is within boundaries
     if rating > 5 or rating < 1:
         return render_template('create_movies_form.html', create_rating_active=True,error= True)
 
     # then creates a movie
-    movie_repository.create_movie(title,director,rating)
-    print(title)
-    print(director)
-    print(rating)
+    new_movie = movie_repository.create_movie(title,director,rating)
+    print(new_movie.movie_id)
+#    print(title)
+#    print(director)
+#    print(rating)
 
     return redirect('/movies')
 
@@ -72,7 +73,8 @@ def get_single_movie(movie_id: int):
 
 @app.get('/movies/<int:movie_id>/edit')
 def get_edit_movies_page(movie_id: int):
-    return render_template('edit_movies_form.html')
+
+    return render_template('edit_movies_form.html', id=movie_id)
 
 
 @app.post('/movies/<int:movie_id>')
