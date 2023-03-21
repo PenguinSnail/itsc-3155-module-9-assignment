@@ -45,7 +45,7 @@ def get_single_movie(movie_id: int):
     director = movie.director
     rating = movie.rating
 
-    return render_template('get_single_movie.html', movie_director=director, movie_title=movie, movie_rating=movie)
+    return render_template('get_single_movie.html', movie_director=director, movie_title=title, movie_rating=rating, movie_id=movie_id)
 
 
 @app.get('/movies/<int:movie_id>/edit')

@@ -18,11 +18,11 @@
 
 <h2>Actions</h2>
 
-<form>
+<form method="get" action="/movies/{{ movie_id }}/edit">
     <button type="submit" class="btn btn-outline-primary">Edit Information</button>
 </form>
 
-<form>
+<form method="post" action="/movies/{{ movie_id }}/delete">
     <button type="submit" class="btn btn-danger">
         <img class="img-responsive center-block" src="/images/trashcan.svg" alt="Delete">
     </button>
