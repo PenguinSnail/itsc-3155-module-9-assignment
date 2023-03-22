@@ -4,6 +4,7 @@ from app import app
 from src.repositories.movie_repository import get_movie_repository
 def test_all_movies_page():
     movie_repository = get_movie_repository()
+    movie_repository.clear_db()
     movie_repository.create_movie('test movie', 'test director', 5)
     assert len(movie_repository.get_all_movies()) ==1
 
