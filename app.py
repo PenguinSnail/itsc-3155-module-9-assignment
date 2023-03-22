@@ -1,8 +1,10 @@
 from flask import Flask, redirect, render_template, request
 
+
 from src.repositories.movie_repository import get_movie_repository
 
 app = Flask(__name__)
+
 
 # Get the movie repository singleton to use throughout the application
 movie_repository = get_movie_repository()
@@ -73,6 +75,8 @@ def get_single_movie(movie_id: int):
     director = movie.director
     rating = movie.rating
 
+    
+    
     return render_template('get_single_movie.html', movie_director=director, movie_title=title, movie_rating=rating, movie_id=movie_id)
 
 

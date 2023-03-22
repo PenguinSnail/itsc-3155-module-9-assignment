@@ -18,15 +18,23 @@
 
 <h2>Actions</h2>
 
-<form method="get" action="/movies/{{ movie_id }}/edit">
-    <button type="submit" class="btn btn-outline-primary">Edit Information</button>
-</form>
+<div class="row justify-content-start">
+    <div class="col-auto">
+        <form method="get" action="/movies/{{ movie_id }}/edit">
+            <button type="submit" class="btn btn-outline-primary m-2">Edit Information</button>
+        </form>
+    </div>
+    <div class="col-1">
+        <form method="post" action="/movies/{{ movie_id }}/delete">
+            <button type="submit" class="btn btn-danger m-2">
+                <img class="img-responsive center-block" src="/static/trashcan.svg" alt="Delete" height="24px">
+            </button>
+        </form>
+    </div>
+</div>
 
-<form method="post" action="/movies/{{ movie_id }}/delete">
-    <button type="submit" class="btn btn-danger">
-        <img class="img-responsive center-block" src="/images/trashcan.svg" alt="Delete">
-    </button>
-</form>
+
+
 
 {% endblock %}
  
