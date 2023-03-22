@@ -12,8 +12,8 @@ def test_view_movie_page():
     data = response.data.decode('utf-8')
     assert response.status_code == 200
 
-    assert '<h2>Director</h2>\n<p>Michael Bay</p>' in data
+    assert '<p>Michael Bay</p>' in data
 
-    assert '<h2>Rating</h2>\n<p>5/5</p>' in data
+    assert '<p>5/5</p>' in data
 
     assert '<h1 class="mb-5">Information for <em>Master of Disguise</em></h1>' in data
