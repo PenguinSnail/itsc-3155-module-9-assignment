@@ -1,13 +1,7 @@
 # TODO: Feature 2
 # Franky Yang
 
-import pytest
 from app import app
-
-@pytest.fixture(scope = 'module')
-def test_app():
-    app.test_client()
-    return app.test_client()
 
 def create_movie(test_app,Title,Director,Rating):
     response = test_app.post('/movies', data = {
