@@ -10,6 +10,7 @@ def test_app():
     return app.test_client()
 
 def create_movie(test_app,Title,Director,Rating):
+# runs the page with the passed inputs returns the response
     response = test_app.post('/movies', data = {
         "movie_title": Title,
         "movie_director": Director,
@@ -18,8 +19,8 @@ def create_movie(test_app,Title,Director,Rating):
      
     return response
 
-# test to ensure that the page still loads properly after creating a movie 
 def test_valid_movie_creation(test_app):
+# test to ensure that page loads properly after valid movie creation
     test_valid_movie_creation = create_movie(test_app,"Title","Director","5")
     assert test_valid_movie_creation.request.path == "/movies"
     assert test_valid_movie_creation.status_code == 200
@@ -27,7 +28,7 @@ def test_valid_movie_creation(test_app):
 
 def test_no_title(test_app):
 # test to check that the form reloads with an error on the page
-# # if the movie title was left blank
+#if the movie title was left blank
     test_no_title = create_movie(test_app,"","Director","5")
     assert test_no_title.request.path == "/movies"
     assert "Error" in test_no_title.data.decode('utf-8')

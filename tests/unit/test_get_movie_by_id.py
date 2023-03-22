@@ -17,3 +17,4 @@ def test_get_movie_wrong_id():
        assert False
     except:
         assert True
+

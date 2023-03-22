@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, abort
 
 
 from src.repositories.movie_repository import get_movie_repository
@@ -30,6 +30,7 @@ def create_movies_form():
 @app.post('/movies')
 def create_movie():
     # TODO: Feature 2
+    # Franky Yang
     # After creating the movie in the database, we redirect to the list all movies page
     
     # puts the form information from the html into variables
@@ -46,10 +47,12 @@ def create_movie():
     # checks all inputs to make sure none of them are blank
     if not title or not director:
         return redirect('/movies/new',create_rating_active=True,error= True)
+
  
     # checks if rating is within boundaries
     if rating > 5 or rating < 1:
         return redirect('/movies/new',create_rating_active=True,error= True)
+
 
     # then creates a movie
     new_movie = movie_repository.create_movie(title,director,rating)
@@ -63,9 +66,17 @@ def create_movie():
 
 @app.get('/movies/search')
 def search_movies():
-    # TODO: Feature 3
-    return render_template('search_movies.html', search_active=True)
-
+# Feature 3: check if movie exists and if it does push to movie page
+    movie_title = request.args.get("title", type=str)
+    if movie_title:
+        movie = movie_repository.get_movie_by_title(movie_title)
+        if movie != None:
+            return redirect('/movies/' + str(movie.movie_id))
+        else:
+            return render_template('search_movies.html', search_active=True, error=True)
+    else:
+        return render_template('search_movies.html', search_active=True)
+        
 
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
@@ -75,8 +86,6 @@ def get_single_movie(movie_id: int):
     director = movie.director
     rating = movie.rating
 
-    
-    
     return render_template('get_single_movie.html', movie_director=director, movie_title=title, movie_rating=rating, movie_id=movie_id)
 
 

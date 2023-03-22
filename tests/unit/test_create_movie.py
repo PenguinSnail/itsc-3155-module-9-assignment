@@ -1,7 +1,6 @@
 # TODO: Feature 2
 # Franky Yang
 
-import pytest
 from src.repositories.movie_repository import get_movie_repository
 
 def test_create_movie():
@@ -15,6 +14,6 @@ def test_create_movie():
     # creates the movie object in the repository
     test_repo.create_movie("Title","Director",5)
 
-    # test to make 
-    assert len(test_repo._db) == initial +1
+    # test to make sure the movie is added
+    assert len(test_repo._db) == initial+1
 
