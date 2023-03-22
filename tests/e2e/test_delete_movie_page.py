@@ -14,3 +14,4 @@ def test_delete(test_app: FlaskClient):
     response = test_app.post(f'/movies/{new_movie1.movie_id}/delete', follow_redirects = True)
     assert len(movie_repository._db) == 1
     assert response.status_code == 200
+    assert response.request.path == ("/movies")
