@@ -8,47 +8,41 @@
 <!-- TODO: Feature 2 -->
 
 
-<div class = "card">
-
-<!--Displays error message if applicable-->
-{%if error == True%}
-<div class="alert alert-danger" role="alert">
-    <p>Error: The form you submitted was invalid</p>
-</div>
-{%endif%}
+<div class="card">
+    <!--Displays error message if applicable-->
+    {%if error == True%}
+    <div class="alert alert-danger" role="alert">
+        Error: The form you submitted was invalid
+    {%endif%}
 
 
-<!-- Takes in the data to create a movie rating-->
-<form action = "/movies" class = "card-body" method = "POST">
-    <!--Takes the input of the name of the movie-->
-    <div class = "form-group p-2">
-        <label for= "movie_title" > Name of the Move: </label>
-        <input type="text" name = "movie_title" required
-        class = "form-control"
-        placeholder="Enter the name of the movie">
-    </div>
+    <!-- Takes in the data to create a movie rating-->
+    <form action="/movies" class="card-body" method="POST">
+        <!--Takes the input of the name of the movie-->
+        <div class="form-group p-2">
+            <label for="movie_title">Movie Title:</label>
+            <input type="text" name="movie_title" required class="form-control"
+                placeholder="Enter the name of the movie">
+        </div>
 
-    <!--Takes the input of the director of the movie-->
-    <div class = "form-group p-2">
-        <label for= "movie_director"> Director of the Move: </label>
-        <input type="text" name = "movie_director" required
-        class = "form-control"
-        placeholder="Enter the director of the movie">
-    </div>
+        <!--Takes the input of the director of the movie-->
+        <div class="form-group p-2">
+            <label for="movie_director">Director:</label>
+            <input type="text" name="movie_director" required class="form-control"
+                placeholder="Enter the director of the movie">
+        </div>
 
-    <!--Takes the rating of the movie-->
-    <div class = "form-group p-2">
-        <label for= "movie_rating"> Rating(1 to 5): </label>
-        <input type="number" name = "movie_rating" 
-        min="1" max = "5"
-        required class = "form-control"
-        placeholder="Rate the movie">
-    </div>
+        <!--Takes the rating of the movie-->
+        <div class="form-group p-2">
+            <label for="movie_rating">Rating (1 to 5):</label>
+            <input type="number" name="movie_rating" min="1" max="5" required class="form-control"
+                placeholder="Rate the movie">
+        </div>
 
-    <!--Submit button-->
-    <div class = "form-group p-2">
-        <input type ="submit" class = "btn btn-primary">
-    </div>
+        <!--Submit button-->
+        <div class="form-group p-2">
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
 </div>
 </form>
 {% endblock %}
