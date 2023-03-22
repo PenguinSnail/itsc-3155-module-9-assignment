@@ -9,18 +9,18 @@
     <thead>
       <tr>
         <th scope="col">Movie</th>
-        <th scope="col">rating</th>
+        <th scope="col">Rating</th>
       </tr>
     </thead>
     <tbody>
-      {% for object in moviedict %}
-    
+      {% for key in moviedict %}  
       <tr>
-        <td>{{moviedict[object].title}}</td>
-        <td>{{moviedict[object].rating}}</td>
+        <td><a href="/movies/{{moviedict[key].movie_id}}" >{{moviedict[key].title}}</a> </td>
+        <td>{{moviedict[key].rating}}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+
 <!-- TODO: Feature 1 -->
 {% endblock %}

@@ -1,8 +1,10 @@
 from flask import Flask, redirect, render_template, request, abort
 
+
 from src.repositories.movie_repository import get_movie_repository
 
 app = Flask(__name__)
+
 
 # Get the movie repository singleton to use throughout the application
 movie_repository = get_movie_repository()
@@ -35,23 +37,29 @@ def create_movie():
     title = request.form.get("movie_title").strip()
     director = request.form.get("movie_director").strip()
     
-    # trys to convert rating into a number if not rejects form
+    # tries to convert rating into a number if not rejects form
     try:
         rating = int(request.form.get("movie_rating"))
 
     except ValueError:
-        return render_template('create_movies_form.html', create_rating_active=True,error= True)
+        return redirect('/movies/new',create_rating_active=True,error= True)
 
     # checks all inputs to make sure none of them are blank
     if not title or not director:
-        return render_template('create_movies_form.html', create_rating_active=True,error= True)
+        return redirect('/movies/new',create_rating_active=True,error= True)
+
  
-    # checks if rating is within boundries
+    # checks if rating is within boundaries
     if rating > 5 or rating < 1:
-        return render_template('create_movies_form.html', create_rating_active=True,error= True)
+        return redirect('/movies/new',create_rating_active=True,error= True)
+
 
     # then creates a movie
-    movie_repository.create_movie(title,director,rating)
+    new_movie = movie_repository.create_movie(title,director,rating)
+    print(new_movie.movie_id)
+#    print(title)
+#    print(director)
+#    print(rating)
 
     return redirect('/movies')
 
@@ -83,17 +91,30 @@ def get_single_movie(movie_id: int):
 
 @app.get('/movies/<int:movie_id>/edit')
 def get_edit_movies_page(movie_id: int):
-    return render_template('edit_movies_form.html')
+    movie = movie_repository.get_movie_by_id(movie_id=movie_id)
+    if movie:
+        return render_template('edit_movies_form.html', id=movie_id, title=movie.title, director=movie.director, rating=movie.rating)
+    return redirect('/movies')
 
 
 @app.post('/movies/<int:movie_id>')
 def update_movie(movie_id: int):
-    # TODO: Feature 5
-    # After updating the movie in the database, we redirect back to that single movie page
+    title = request.form.get("movie_title").strip()
+    director = request.form.get("movie_director").strip()
+    rating = request.form.get("movie_rating", type=int)
+
+    # check all fields exist and rating is between 1 and 5
+    if not title or not director or not rating or rating > 5 or rating < 1:
+        movie = movie_repository.get_movie_by_id(movie_id=movie_id)
+        if movie:
+            return render_template('edit_movies_form.html', id=movie_id, title=movie.title, director=movie.director, rating=movie.rating, error=True)
+        return redirect('/movies')
+
+    movie_repository.update_movie(movie_id=movie_id, title=title, director=director, rating=rating)
     return redirect(f'/movies/{movie_id}')
 
 
 @app.post('/movies/<int:movie_id>/delete')
 def delete_movie(movie_id: int):
     # TODO: Feature 6
-    pass
+    movie_repository.delete_movie(movie_id)
