@@ -67,8 +67,13 @@ def search_movies():
 
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
-    # TODO: Feature 4
-    return render_template('get_single_movie.html')
+    #feature 4: get movie info and send to HTML
+    movie = movie_repository.get_movie_by_id(movie_id)
+    title = movie.title
+    director = movie.director
+    rating = movie.rating
+
+    return render_template('get_single_movie.html', movie_director=director, movie_title=title, movie_rating=rating, movie_id=movie_id)
 
 
 @app.get('/movies/<int:movie_id>/edit')
