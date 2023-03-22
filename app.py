@@ -16,7 +16,8 @@ def index():
 @app.get('/movies')
 def list_all_movies():
     # TODO: Feature 1
-    return render_template('list_all_movies.html', list_movies_active=True)
+
+    return render_template('list_all_movies.html', list_movies_active=True, moviedict = movie_repository.get_all_movies())
 
 
 @app.get('/movies/new')
@@ -27,7 +28,31 @@ def create_movies_form():
 @app.post('/movies')
 def create_movie():
     # TODO: Feature 2
+    # Franky Yang
     # After creating the movie in the database, we redirect to the list all movies page
+    
+    # puts the form information from the html into variables
+    title = request.form.get("movie_title").strip()
+    director = request.form.get("movie_director").strip()
+    
+    # trys to convert rating into a number if not rejects form
+    try:
+        rating = int(request.form.get("movie_rating"))
+
+    except ValueError:
+        return render_template('create_movies_form.html', create_rating_active=True,error= True)
+
+    # checks all inputs to make sure none of them are blank
+    if not title or not director:
+        return render_template('create_movies_form.html', create_rating_active=True,error= True)
+ 
+    # checks if rating is within boundries
+    if rating > 5 or rating < 1:
+        return render_template('create_movies_form.html', create_rating_active=True,error= True)
+
+    # then creates a movie
+    movie_repository.create_movie(title,director,rating)
+
     return redirect('/movies')
 
 
