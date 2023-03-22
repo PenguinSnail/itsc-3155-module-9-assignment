@@ -4,15 +4,19 @@
 
 {% block body %}
 <h1 class="mb-5">Search Movie Ratings</h1>
-<p class="mb-3">Search for a movie rating below</p>
 <!-- TODO: Feature 3 -->
 <div class = "card">
-    <form class="card-body">
+    <form class="card-body" method="get" action="movies/search">
+        
         <div class="form-group p-2">
             <label for="title">Movie Title</label>
             <input type="title" class="form-control" id="title" placeholder="Enter Movie Title">
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
+        
+        <div class="form-group p-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    
     </form>
 </div>
 {% endblock %}
