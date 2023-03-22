@@ -4,6 +4,13 @@
 
 {% block body %}
 <h1 class="mb-5">Search Movie Ratings</h1>
+
+{%if error == True%}
+<div class="alert alert-danger" role="alert">
+    <p>Error: Movie not Found</p>
+</div>
+{%endif%}
+
 <!-- TODO: Feature 3 -->
 <div class = "card">
     <form class="card-body" method="get" action="/movies/search">
