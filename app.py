@@ -60,16 +60,16 @@ def create_movie():
 def search_movies():
     # Feature 3: check if movie exists and if it does push to movie page
     movie_title = request.form.get('movie_title', type=str)
-    if movie_title == None:
-        return render_template('search_movies.html', search_active=True)
-    else:
-        movie = movie_repository.get_movie_by_title(movie_title)
+    movie = movie_repository.get_movie_by_title(movie_title)
+    if movie != None:
         id = movie.movie_id
         title = movie.title
         director = movie.director
         rating = movie.rating
         return render_template('get_single_movie.html', movie_director=director, movie_title=title, movie_rating=rating, movie_id=id)
-
+    else:
+        return render_template('search_movies.html', search_active=True)
+        
 
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
