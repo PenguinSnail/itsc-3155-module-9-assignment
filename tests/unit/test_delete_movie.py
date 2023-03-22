@@ -13,3 +13,4 @@ def test_delete_movie():
     movie_repository.delete_movie(new_movie.movie_id)
     # Checking that the movie was deleted from the repository
     assert len(movie_repository._db) == inital
+    
