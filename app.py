@@ -59,8 +59,10 @@ def create_movie():
 @app.get('/movies/search')
 def search_movies():
     # Feature 3: check if movie exists and if it does push to movie page
-    movie_title = request.form.get('movie_title', type=str)
+    movie_title = request.form.get("title", type=str)
+    print(movie_title)
     movie = movie_repository.get_movie_by_title(movie_title)
+    print(movie)
     if movie != None:
         id = movie.movie_id
         title = movie.title
