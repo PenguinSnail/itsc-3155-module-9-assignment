@@ -11,5 +11,7 @@ def test_delete(test_app: FlaskClient):
     new_movie2 = movie_repository.create_movie('name', 'direct', 2)
     assert len(movie_repository._db) == 2
     
-    test_app.post(f'/movies/{new_movie1.movie_id}/delete')
+    response = test_app.post(f'/movies/{new_movie1.movie_id}/delete', follow_redirects = True)
     assert len(movie_repository._db) == 1
+    assert response.status_code == 200
+    assert response.request.path == ("/movies")
