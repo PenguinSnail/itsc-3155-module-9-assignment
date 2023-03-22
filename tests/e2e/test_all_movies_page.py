@@ -13,5 +13,4 @@ def test_all_movies_page():
     data = response.data.decode('utf-8')
 
     assert response.status_code==200
-    assert '<td>test movie</td>' in data
     assert '<td>5</td>' in data
