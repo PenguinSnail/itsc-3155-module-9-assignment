@@ -8,7 +8,6 @@ def test_get_all_movies():
      test = len(movie_repository.get_all_movies())
      assert test ==0
 
-     movie_repository.create_movie('test move', 'test director', 5)
      test = len(movie_repository.get_all_movies())
      assert test ==1
 
